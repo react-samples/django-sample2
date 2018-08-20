@@ -1,0 +1,10 @@
+db.sqlite3
+.git
+.git/
+*.DS_Store
+.png
+__pycache__
+__pycache__/*
+*.pyc
+migrations
+migrations/

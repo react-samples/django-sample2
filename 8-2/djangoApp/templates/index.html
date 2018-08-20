@@ -1,0 +1,48 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8"/>
+  </head>
+  <body>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col"></th>
+          <th scope="col">タイトル</th>
+          <th scope="col">説明</th>
+          <th scope="col">フィードのURL</th>
+          <th scope="col">削除</th>
+          <th scope="col">追加</th>
+          <th scope="col">ページ一覧</th>
+        </tr>
+      </thead>
+      <tbody>
+      {% for feed in feeds %}
+        <tr>
+          <th scope="row">{{ forloop.counter }}</th>
+          <td>{{ feed.title }}</td>
+          <td>{{ feed.description }}</td>
+          <td>{{ feed.href }}</td>
+          <td>
+            <form action="/delete" method="POST">
+              {% csrf_token %}
+              <input name="id" type="hidden" value="{{ feed.id }}"/>
+              <button type="submit">削除</button>
+            </form>
+          </td>
+          <td>
+            <a href="/page_form?id={{ feed.id }}">
+              ページを追加
+            </a>
+          </td>
+          <td>
+            <a href="/{{ feed.id }}/pages">
+              ページを追加
+            </a>
+          </td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </body>
+</html>
